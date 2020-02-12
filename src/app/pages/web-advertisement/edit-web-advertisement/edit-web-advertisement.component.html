@@ -1,0 +1,87 @@
+<form [formGroup]="form" class="dialog-wrapper">
+  <div class="dialog-header">
+    <div class="title">
+      Update Web Advertisement
+    </div>
+    <div class="flex1"></div>
+    <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+      <i class="material-icons">&#xE14C;</i>
+    </a>
+  </div>
+  <div class="dialog-content">
+    <div class="form-wrapper">
+    <!-- <span class="error-message">{{ expiredDate | date:'yy/MM/d' }}</span> -->
+      <div class="ui form">
+        <div class="field" style="padding-bottom:80px;">
+          <div style="width:67%;margin-right:12px;;float:left">
+            <label>Ads Name
+              <span class="rq-sign">*</span>
+            </label>
+            <input type="text" #focusInput placeholder="Enter content title" required formControlName="name">
+            <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+              class="error-message">This field is required.</div>
+            <div *ngIf="form.controls['name'].hasError('nameAvailable')" class="error-message">This name is taken. Try
+              another.</div>
+          </div>
+          <div style="max-width: 132px;float: left;" >
+            <label>Ordering Number
+              <span class="rq-sign">*</span>
+            </label>
+            <input type="number" #focusInput placeholder="Enter content title" required formControlName="orderingNumber">
+            <div *ngIf="form.controls['orderingNumber'].hasError('required') && form.controls['orderingNumber'].touched"
+              class="error-message">This field is required.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Add More Package <span class="rq-sign">*</span>
+          </label>
+          <mat-select [compareWith]="compareObjects" formControlName="package">
+            <mat-option value="no">Not</mat-option>
+            <mat-option *ngFor="let item of packages" [value]="item">
+              {{item.name}} - {{item.price|currency}} / {{item.period}} day{{item.period>1?'s':''}}
+            </mat-option>
+          </mat-select>
+        </div >
+
+        <div class="field">
+          <label>Advertise Type <span class="rq-sign">*</span>
+          </label>
+          <mat-select formControlName="advertiseType">
+            <mat-option *ngFor="let item of ADS" [value]="item">
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <div class="field">
+          <label>Add Link
+          </label>
+          <input style="color: blue;" type="url"  placeholder="Enter Link" formControlName="link">
+        </div>
+
+
+        <div class="field">
+          <button style="background-color: #F5F6F7 ;width:100%;margin-top: 1rem" mat-button [disabled]="disableBtn"
+            (click)="showFileManager()">Add file from gallery
+          </button>
+
+          <div class="img-content" *ngIf="fileurl">
+            <img [src]="fileurl" style="width: 100%; margin-top: 1rem;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="dialog-footer">
+    <div class="flex1"></div>
+    <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+    <!-- <button type="submit" class="enbutton primary m-r16" [disabled]="!form.valid || store?.process"
+      (click)="create(form.value,true)">Save New</button> -->
+    <button class="enbutton primary m-r16" [disabled]="!form.valid || store?.process"
+      (click)="create(form.value,false)">Save
+      Close</button>
+  </div>
+  <app-spinner *ngIf="store?.process"></app-spinner>
+</form>

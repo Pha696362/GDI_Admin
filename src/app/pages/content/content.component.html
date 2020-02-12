@@ -1,0 +1,203 @@
+<ng-container *mobxAutorun>
+  <div class="page-section">
+    <div class="action-bar">
+      <div class="nav-content">
+        <h3 class="head-title" style="max-width: 14%;">
+          <!-- <button class="mat-icon-1" mat-button mat-icon-button (click)="_goBack()">
+            <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>
+          </button> -->
+          មាតិការទាំងអស់
+        </h3>
+        <div class="custom-search">
+          <input class="custom-search-input" [(ngModel)]="searchValue" (ngModelChange)="store?.fetchSearchContent($event)" matInput placeholder="search content">
+        </div>
+        <!-- <mat-form-field class="custom-search">
+          <mat-label>Search</mat-label>
+          <input [(ngModel)]="searchValue" (ngModelChange)="store?.fetchSearchContent($event)" matInput placeholder="search content">
+        </mat-form-field> -->
+        <div class="flex1"></div>
+        <div class="action-list-item">
+          <div class="action-item">
+            <button *ngIf="env.users?.roles?.permission[2].create" mat-button (click)="create()" class="enbutton primary">Add new Content</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link routerLink="/app/content/all" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive" (click)="_onFilter('all')">ALL</a>
+      <a mat-tab-link *ngFor="let link of store?.dataCategory"
+      (click)="_onFilter(link.key)" [routerLink]="'/app/content/'+link?.key" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">{{link.name}}</a>
+      <!-- <div style="display: flex;flex: 1;"></div> -->
+    </nav>
+
+    <ng-container>
+      <form [formGroup]="form" class="dialog-wrapper">
+      <mat-card class="custom-filter">
+        <mat-form-field appearance="outline" style="margin-right: 10px;">
+          <mat-label style="margin-top: 10px !important;">From Date</mat-label>
+          <input matInput [matDatepicker]="picker1" [max]="this.toDate.value !== null ? this.toDate.value : maxToDate" formControlName="fromDate" placeholder="From a date">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-right: 10px;">
+          <mat-label>To Date</mat-label>
+          <input matInput [matDatepicker]="picker2" [min]="this.fromDate.value" [max]="maxToDate" formControlName="toDate" placeholder="To a date">
+          <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="fromDate.value !== null ? false : true"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field *ngIf="env?.users?.roles?.name.toUpperCase() === 'ADMIN'" appearance="outlined" style="width:12%;margin-right:10px">
+          <mat-select formControlName="createBy">
+            <mat-option value="all">All</mat-option>
+            <mat-option *ngFor="let item of env?.data" [(value)]="item.key">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field *ngIf="env?.users?.roles?.name.toUpperCase() !== 'ADMIN'" appearance="outlined" style="width:12%;margin-right:10px">
+          <mat-select formControlName="createBy">
+            <mat-option [value]="env?.users?.key">{{env?.users?.name}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field appearance="outlined" style="width:12%;margin-right:10px">
+          <mat-select formControlName="status">
+            <mat-option value="all">All</mat-option>
+            <mat-option *ngFor="let item of statusData" [(value)]="item.key">
+              {{item.text}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button [disabled]="!form.valid || store?.process" mat-raised-button class="filter-button" (click)="FilterBetweenDate()" >Search</button>
+        <button [disabled]="!form.valid || store?.process" mat-raised-button style="color: maroon !important;" (click)="resetDate()" >Reset</button>
+      </mat-card>
+     </form>
+    </ng-container>
+
+    <ng-container *ngIf="!store?.loading">
+      <div class="card-wrapper tab" *ngIf="!store?.empty">
+        <div class="tb-content">
+          <div class="card-header">
+
+            <div class="card-item">
+              <div class="card-col5">
+                <div class="flex-block">
+                  No
+                </div>
+              </div>
+              <div class="card-col15">
+                <div class="flex-block">
+                  Image
+                </div>
+              </div>
+              <div class="card-col25">
+                <div class="flex-block">
+                  Name
+                </div>
+              </div>
+              <div class="card-col15">
+                <div class="flex-block">
+                  Author
+                </div>
+              </div>
+              <div class="card-col20">
+                <div class="flex-block">
+                  Create Date
+                </div>
+              </div>
+              <div class="card-col10">
+                <div class="flex-block">
+                  Status
+                </div>
+              </div>
+              <div class="card-col5">
+                <div class="flex-block">
+                  View
+                </div>
+              </div>
+              <div class="card-col5"></div>
+            </div>
+          </div>
+          <div class="card-content">
+            <ng-container *ngFor="let item of store?.data ;let i=index">
+              <div class="card-item">
+                <div class="card-col5">
+                  <div class="flex-block">
+                    <span>{{i+1}}</span>
+                  </div>
+                </div>
+                <div class="card-col15">
+                  <div class="flex-block" link>
+                    <div class="img-content" (click)="detail(item)">
+                      <img [src]="item?.fileurl" style="width:100%;height:10vh;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-col25">
+                  <div class="flex-block" link>
+                    <strong (click)="detail(item)">{{item?.name}}</strong>
+                  </div>
+                </div>
+                <div class="card-col15">
+                  <div class="flex-block ">
+                    {{item?.update_by?.name}}
+                  </div>
+                </div>
+                <div class="card-col20">
+                  <div class="flex-block">
+                    {{item?.create_date?.toDate() | date:'short'}}
+                  </div>
+                </div>
+                <div class="card-col10">
+                  <div class="flex-block">
+                    {{ item?.status?.text }}
+                  </div>
+                </div>
+                <div class="card-col5">
+                  <div class="flex-block">
+                    {{item?.top_view}}
+                  </div>
+                </div>
+                <div class="card-col5">
+                  <div class="card-list-action" *ngIf="env.users?.roles?.permission[2].edit || env.users?.roles?.permission[2].delete">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+
+                      <button *ngIf="env.users?.roles?.permission[2].edit" mat-menu-item (click)="edit(item)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                      </button>
+                      <button *ngIf="env.users?.roles?.permission[2].delete" mat-menu-item (click)="delete(item)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="empty-block" *ngIf="store?.empty">
+        <div class="center-block-empty">
+          <div class="empty-img">
+            <img src="https://mobilecenter.azureedge.net/generated/img/no-apps-db6363dd644196e2291b243bc210e1b0.svg"
+              alt="empty">
+          </div>
+          <div class="empty-text">
+            <p class="empty-state-title">No Content</p>
+            <p class="empty-state-desc">
+              You don't have any Content yet. Please create course for apply content in category.
+            </p>
+            <button *ngIf="env.users?.roles?.permission[2].create" mat-button class="add-button" (click)="create()">Add new Content</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <app-spinner *ngIf="store?.loading"></app-spinner>
+</ng-container>

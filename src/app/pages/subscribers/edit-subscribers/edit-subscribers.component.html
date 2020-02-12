@@ -1,0 +1,70 @@
+<form [formGroup]="form" class="dialog-wrapper">
+  <div class="dialog-header">
+    <div class="title">
+      Update profile
+    </div>
+    <div class="flex1"></div>
+    <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+      <i class="material-icons">&#xE14C;</i>
+    </a>
+  </div>
+  <div class="dialog-content">
+    <div class="form-wrapper">
+      <div class="ui form">
+        <!-- <div class="field">
+              <label>Phone number
+                <span class="rq-sign">*</span>
+              </label>
+              <input type="text" #focusInput class="lg-input" placeholder="Subscriber phone number" required formControlName="phone">
+              <div *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched"
+                class="error-message">This field is required.</div>
+              <div *ngIf="form.controls['phone'].hasError('nameAvailable')" class="error-message">This name is taken. Try
+                another.</div>
+            </div> -->
+        <div class="fields two">
+          <div class="field">
+            <label>First name
+              <span class="rq-sign">*</span>
+            </label>
+            <input type="text" class="lg-input" placeholder="First name" required formControlName="firstName">
+            <div *ngIf="form.controls['firstName'].hasError('required') && form.controls['firstName'].touched"
+              class="error-message">This field is required.</div>
+
+          </div>
+          <div class="field">
+            <label>Last name
+              <span class="rq-sign">*</span>
+            </label>
+            <input type="text" class="lg-input" placeholder="Last name" required formControlName="lastName">
+            <div *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched"
+              class="error-message">This field is required.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" class="lg-input" placeholder="someone@mail.com" formControlName="email">
+        </div>
+        <!-- <div class="field">
+            <label>Package <span class="rq-sign">*</span>
+            </label>
+            <mat-select [compareWith]="compareObjects" formControlName="product">
+              <mat-option *ngFor="let item of products" [value]="item">
+                {{item.name}} - {{item.price|currency}} / {{item.period}} month{{item.period>1?'s':''}}
+              </mat-option>
+            </mat-select>
+            <div *ngIf="form.controls['product'].hasError('required') && form.controls['product'].touched"
+              class="error-message">
+              This field is required.
+            </div>
+          </div> -->
+      </div>
+    </div>
+
+  </div>
+  <div class="dialog-footer">
+    <div class="flex1"></div>
+    <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+    <button type="submit" class="enbutton primary m-r16" [disabled]="!form.valid" (click)="create(form.value)">Update</button>
+  </div>
+  <app-spinner *ngIf="store?.process"></app-spinner>
+</form>

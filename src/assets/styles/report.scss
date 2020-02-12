@@ -1,0 +1,340 @@
+.filter-section {
+  padding: 18px 24px;
+  position: sticky;
+  top: 103px;
+  background-color: #039be5;
+  .form-wrapper {
+    padding: 0;
+    .form {
+      display: flex;
+      align-items: center;
+    }
+    .field {
+      flex: 1;
+    }
+  }
+  .ui.form .field > label {
+    color: #fff;
+  }
+}
+
+.report-wrapper {
+  padding: 24px;
+  .print-button {
+    &.fixed {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+    }
+  }
+}
+
+.print-wrapper {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 4px;
+  .sheet {
+    max-width: 1100px;
+    margin: 0 auto;
+    .logo-block {
+      width: 108px;
+      height: 108px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+      }
+    }
+    .sheet-content {
+    }
+    .report-header {
+    }
+    .report-body {
+    }
+    .listing-table {
+      width: 100%;
+      th {
+        text-transform: uppercase;
+      }
+      .no,
+      .status,
+      .type {
+        display: inline-flex;
+        background-color: #fead01;
+        padding: 4px;
+        border-radius: 50%;
+        min-width: 28px;
+        align-items: center;
+        justify-content: center;
+      }
+      .status {
+        background-color: #fead01;
+        border-radius: 26px;
+        padding: 4px 16px;
+        &.green {
+          background-color: greenyellow;
+        }
+      }
+      .type {
+        background-color: greenyellow;
+        border-radius: 26px;
+        padding: 4px 16px;
+      }
+    }
+  }
+  .recept-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 24px;
+  }
+}
+
+
+
+//
+.teach-assignment-wrapper {
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 4px;
+  margin-bottom: 64px;
+  .teach-assignment-header {
+      text-align: center;
+      position: relative;
+      display: block;
+      .title {
+          margin-bottom: 20px;
+          color: $hoverPrimary;
+          font-size: 24px;
+          font-weight: 600;
+      }
+      .term {
+          background-color: #ffd800;
+          padding: 4px 16px;
+          margin-bottom: 20px;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          font-weight: 500;
+      }
+  }
+  .teach-assignment-body {
+      .prof-title {
+          color: #03941d;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 10px;
+      }
+  }
+  .schedule-list {
+      margin-bottom: 22px;
+      position: relative;
+      display: block;
+      .schedule-list-item {
+          padding: 0 24px;
+          margin-bottom: 10px;
+      }
+      .sub {
+          font-size: 16px;
+          font-weight: 500;
+      }
+      .table-schedule {
+          width: 100%;
+          margin-bottom: 20px;
+          th {
+              border-bottom: 1px solid #333;
+              color: #111;
+              font-weight: 500;
+          }
+          th,
+          td {
+              padding: 0 8px;
+          }
+      }
+  }
+  .rmk {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+  }
+  .rmk-list {
+      padding-right: 44px;
+      li {
+          margin-bottom: 8px;
+          font-size: 16px;
+          color: #333;
+      }
+  }
+  .table-signature {
+      width: 100%;
+      th {
+          padding-bottom: 64px;
+      }
+      tr {
+          vertical-align: top;
+      }
+  }
+}
+
+.attendance-sheet-wrapper {
+  background-color: #fff;
+  border-radius: 4px;
+  display: table-row-group;
+  .attendance-sheet-table-inner{
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      &.page-break-none{
+          page-break-after: unset;
+      }
+      tr {
+          &:last-child{
+              td,
+              th {
+                  border-bottom: 0px solid #333;
+              }
+          }
+          td,
+          th {
+              border-bottom: 1px solid #333;
+              border-right: 1px solid #333;
+              padding: 0px 8px;
+              height: 20px;
+              font-size: 11px;
+              background-color: #fff;
+              &.block,&.holiday{
+                  background-color: #ddd;
+              }
+              // font-size: 12px;
+              &.no-pd{
+                  padding: 0;
+              }
+              &.nb-r{
+                  border-right: 0px solid #333 !important;
+              }
+              &:last-child{
+                  border-right: 0px solid #333;
+
+              }
+              &.hasbg{
+                  background-color: #DDDDDD;
+
+              }
+              &.nobg{
+                  background-color: transparent;
+              }
+             
+          }
+          th{
+              background-color: #ddd;
+              text-align: center;
+          }
+          &.even-odd-color{
+              td,td{
+              }
+          }
+      }
+  }
+  .attendance-sheet-table {
+      width: 100%;
+      border: 1px solid #333;
+
+      &.page-break-none{
+          page-break-after: unset;
+      }
+      &.no-border-top {
+          border-top: 0;
+      }
+      &.no-border-bottom {
+          border-bottom: 0;
+      }
+      tr {
+          td,
+          th {
+              border-bottom: 1px solid #333;
+              border-right: 1px solid #333;
+              padding: 0px 8px;
+              height: 20px;
+              font-size: 11px;
+              background-color: #fff;
+              &.no-pd{
+                  padding: 0;
+              }
+              &.no-border-top {
+                  border-top: 0;
+              }
+              &.no-border-bottom {
+                  border-bottom: 0;
+              }
+              &.no-border-left {
+                  border-left: 0;
+              }
+              &.no-border-right {
+                  border-right: 0;
+              }
+          }
+      }
+      &.m-col {
+          tr {
+              td,
+              th {
+                  width: 33px;
+                  text-align: center;
+                  padding: 0;
+              }
+          }
+          .s-no {
+              padding: 0px 8px;
+          }
+          .s-name {
+              padding: 0px 8px;
+              border-left: 1px solid #333;
+              border-right: 1px solid #333;
+          }
+          .s-gender {
+              padding: 0px 8px;
+              border-right: 1px solid #333;
+          }
+          .s-id {
+              padding: 0px 8px;
+          }
+          .flex-box {
+              margin-bottom: -1px;
+              margin-top: -1px;
+          }
+      }
+  }
+}
+.puc-groups{
+  .mat-expansion-panel-header-title{
+      font-family: "Google Sans",sans-serif;
+      font-size: 18px;
+      color: #333;
+      font-weight: 500;
+      flex:1;
+      align-items: center;
+     }
+     .mat-expansion-panel-header-description{
+         flex: unset;
+         font-family: "Google Sans",sans-serif;
+         margin-right: $padding;
+     }
+
+}
+
+.rows{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tsc-print-btn {
+  position: fixed !important;
+  bottom: 33px;
+  right: 33px;
+  z-index: 2;
+  &.mat-primary{
+      background-color: #ef6c00;
+      background: linear-gradient(to right, #ef6c00, #fb8c00);
+  }
+}

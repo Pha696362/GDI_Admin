@@ -1,0 +1,119 @@
+<div class="mat-dialog-full-box dark" *mobxAutorun style="background: #f2f2f2">
+  <div class="nav-profile s-detail"
+    style="background-image:url('https://www.gstatic.com/mobilesdk/180530_mobilesdk/zerostates/in-app_messaging_back@2x.png');min-height: 215px;">
+    <div class="profile-header">
+      <div class="header-actions">
+        <button mat-button mat-icon-button (click)="_goBack()">
+          <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>
+        </button>
+      </div>
+      <h4 *ngIf="store?.subscriber">
+        {{ store?.subscriber?.fullName}}
+        <span>, Tel: {{ store?.subscriber?.phone }}</span>
+      </h4>
+
+      <div class="header-actions end">
+        <!-- <div class="campus-select">
+          <button>
+            <i class="material-icons">schedule</i>
+            <div class="name single-line">{{ env?.term?.name }}</div>
+          </button>
+        </div>
+        <button class="more-actions" mat-button mat-icon-button [matMenuTriggerFor]="menuProgram">
+          <mat-icon>apps</mat-icon>
+        </button>
+        <mat-menu #menuProgram="matMenu">
+          <button (click)="_onSelectedAdmission(item)" class="md-option" *ngFor="let item of store?.admissions"
+            mat-menu-item>
+            <mat-icon>add</mat-icon>
+            <span>{{item?.program_academic?.name}}</span>
+          </button>
+        </mat-menu> -->
+      </div>
+    </div>
+    <div class="profile-header col">
+      <h3 *ngIf="store?.subscriber?.product">
+          Membership {{ store?.subscriber?.product?.name }}, {{ store?.subscriber?.product?.price | currency }}
+      </h3>
+      <h3 *ngIf="!store?.subscriber?.product">
+        Not Membership
+      </h3>
+      <div class="group-buttons">
+        <div class="group-mat-button">
+          <button [disabled]="store?.loading" mat-button mat-fab routerLinkActive="active"
+            [routerLink]="['/client/' + store?.subscriberKey + '/overview']">
+            <mat-icon aria-label="Transcript">school</mat-icon>
+          </button>
+          <span class="text-group">Overview</span>
+        </div>
+        <div class="group-mat-button">
+          <button [disabled]="store?.loading" mat-button mat-fab routerLinkActive="active"
+            [routerLink]="['/client/' + store?.subscriberKey + '/payment']">
+            <mat-icon aria-label="Transcript">payment</mat-icon>
+          </button>
+          <span class="text-group">Payment</span>
+        </div>
+        <div class="group-mat-button">
+          <button [disabled]="store?.loading" mat-button mat-fab routerLinkActive="active" (click)="profile()">
+            <mat-icon aria-label="Transcript">person</mat-icon>
+          </button>
+          <span class="text-group">Profile</span>
+        </div>
+        <!-- <div class="group-mat-button">
+          <button [disabled]="store?.loading" mat-button mat-fab routerLinkActive="active"
+            [routerLink]="['/client/' + store?.subscriberKey + '/history']">
+            <mat-icon aria-label="Transcript">remove_from_queue</mat-icon>
+          </button>
+          <span class="text-group">History</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="apps-contain flat-full">
+    <div class="search-engine flat-box s-search">
+      <form [formGroup]="form" class="search-nav" [ngClass]="{ active: formFocus }">
+        <div class="enroll-filter">
+          <mat-select (selectionChange)="_selectionChange($event)" formControlName="searchType"
+            [compareWith]="compareObjects">
+            <mat-option *ngFor="let item of filterBy" [value]="item">
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <input type="text" formControlName="search" [matAutocomplete]="auto" (focus)="_onFocus(true)"
+          (blur)="_onFocus(false)" appFocusSearch placeholder="Search Subscriber" />
+        <mat-autocomplete [displayWith]="displayItem" #auto="matAutocomplete" class="mat-result-items">
+          <div class="mat-auto-header"><strong>Subscriber</strong></div>
+          <mat-option class="options-card" (click)="_optionSelected(state)" *ngFor="let state of store?.memberships"
+            [value]="state">
+            <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false"
+              style="height: 32px; width: 32px; display: block; fill: rgb(255, 180, 0);">
+              <path
+                d="m17.61 13.4-2.49-.68c-2.76-.75-.51-2.87-2.88-3.51l-2.88-.78a.9.9 0 0 0 -1.1.62l-1.27 4.54 3.81 1.04c2.37.64.13 2.76 2.88 3.51l2.72.74 3.26.89z">
+              </path>
+              <path
+                d="m1.5 22a .52.52 0 0 1 -.13-.02.5.5 0 0 1 -.35-.61l5.21-19.02a.5.5 0 0 1 .61-.35l6.92 1.88a2.02 2.02 0 0 1 1.65 2.06c.08.69.13 1.15 1.23 1.45l5.98 1.63a.5.5 0 0 1 .2.86l-4.55 4.04 1.86 5.78a.5.5 0 0 1 -.61.64l-5.98-1.63a2.29 2.29 0 0 1 -1.96-2.3c-.07-.66-.11-.99-.92-1.21l-3.82-1.04a.5.5 0 1 1 .25-.97h.01l3.82 1.04a2.03 2.03 0 0 1 1.65 2.07c.08.69.13 1.15 1.23 1.45l5.1 1.39-1.67-5.22a.5.5 0 0 1 .14-.53l4.11-3.64-5.09-1.39a2.29 2.29 0 0 1 -1.96-2.3c-.07-.66-.11-.99-.92-1.21l-6.44-1.75-5.08 18.54a.5.5 0 0 1 -.48.37z"
+                fill="#484848"></path>
+            </svg>
+            <span class="flex1 mat-space">{{state?.fullName}}</span>
+            <small>{{state?.phone}}</small>
+          </mat-option>
+          <mat-option [disabled]="true" class="mat-empty-result" *ngIf="!loading && store?.memberships?.length === 0">
+            <img
+              src="https://mobilecenter.azureedge.net/generated/img/no-filtered-apps-5e1a9c8b30813a99f20a80479de65977.svg" />
+            <h3>
+              Sorry, we couldn't find any results for "{{ search?.value }}"
+            </h3>
+          </mat-option>
+        </mat-autocomplete>
+        <button mat-icon-button (click)="_onSearch(form.value)">
+          <mat-icon aria-label="search">search</mat-icon>
+        </button>
+      </form>
+    </div>
+
+    <router-outlet></router-outlet>
+    <app-spinner *ngIf="store?.loading"></app-spinner>
+  </div>
+</div>

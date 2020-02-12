@@ -1,0 +1,128 @@
+<ng-container *mobxAutorun>
+  <div class="page-section">
+    <div class="action-bar">
+      <div class="nav-content">
+        <h3 class="head-title" style="flex: none !important;margin-right: 15px;">Gallery</h3>
+        <div class="flex1"></div>
+        <div class="action-list-item" *ngIf="env.users?.roles?.permission[9].create">
+          <div class="action-item">
+            <button mat-button (click)="create()" class="enbutton primary">Add New Image</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav mat-tab-nav-bar>
+      <!-- <a mat-tab-link [routerLink]="" routerLinkActive  (click)="_onFilter()">ALL</a> -->
+      <a mat-tab-link routerLink="/app/images/all" routerLinkActive
+        active="all">All</a>
+    </nav>
+
+    <ng-container *ngIf="!adStore?.loading">
+      <div class="card-wrapper tab" *ngIf="!adStore?.empty">
+        <div class="tb-content">
+          <div class="card-header">
+            <div class="card-item">
+              <div class="card-col5">
+                <div class="flex-block">
+                  No
+                </div>
+              </div>
+
+              <div class="card-col25">
+                <div class="flex-block">
+                  Image
+                </div>
+              </div>
+              <div class="card-col25">
+                <div class="flex-block">
+                  Name
+                </div>
+              </div>
+
+              <div class="card-col25">
+                <div class="flex-block">
+                  Create By
+                </div>
+              </div>
+
+              <div class="card-col15">
+                <div class="flex-block">
+                  Created Date
+                </div>
+              </div>
+              <div class="card-col5"></div>
+            </div>
+          </div>
+          <div class="card-content">
+            <ng-container *ngFor="let item of adStore?.advertise_manager;let i=index">
+              <div class="card-item">
+                <div class="card-col5">
+                  <div class="flex-block">
+                  <span>{{i+1}}</span>
+                  </div>
+                </div>
+
+                <div class="card-col25">
+                  <div class="flex-block" link>
+                    <div class="img-content">
+                      <img [src]="item?.url" style="width:100%;height:10vh;">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-col25">
+                  <div class="flex-block">
+                    <strong >{{item?.name}}</strong>
+                  </div>
+                </div>
+                <div class="card-col25">
+                  <div class="flex-block">
+                    <strong >{{item?.create_by?.name}}</strong>
+                  </div>
+                </div>
+
+                <div class="card-col15">
+                  <div class="flex-block">
+                    {{item?.create_date.toDate() | date:'d/M/y'}}
+                  </div>
+                </div>
+                <div class="card-col5">
+                  <div class="card-list-action" *ngIf="env.users?.roles?.permission[9].delete">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+
+                      <button mat-menu-item (click)="delete(item)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="empty-block" *ngIf="adStore?.empty">
+        <div class="center-block-empty">
+          <div class="empty-img">
+            <img src="https://mobilecenter.azureedge.net/generated/img/no-apps-db6363dd644196e2291b243bc210e1b0.svg"
+              alt="empty">
+          </div>
+          <div class="empty-text">
+            <p class="empty-state-title">No Gallery</p>
+            <p class="empty-state-desc">
+              You don't have any images yet. Please create image for display on app.
+            </p>
+            <button *ngIf="env.users?.roles?.permission[9].create" mat-button class="add-button" (click)="create()">Add new image</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+  </div>
+
+  <app-spinner *ngIf="adStore?.loading"></app-spinner>
+</ng-container>

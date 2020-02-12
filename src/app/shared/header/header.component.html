@@ -1,0 +1,94 @@
+<header id="header" *mobxAutorun>
+    <nav class="top-nav">
+        <div class="nav-content">
+            <div class="left-nav">
+                <div class="campus-select">
+                    <!-- <button>
+                      <i class="material-icons">cloud_queue</i>
+                      <div class="name">
+                          {{env?.user?.province?.name}}
+                          <span *ngIf="env?.selectedTerm">{{env?.selectedTerm?.code}}</span>
+                      </div>
+                      <i class="material-icons">arrow_drop_down</i>
+                  </button> -->
+                    <!-- [matMenuTriggerFor]="menu" <mat-menu #menu="matMenu" class="mat-campus">
+                      <button class="csmat-menu-item camp" mat-menu-item [ngClass]="{active:cp?.id===campus?.selectedCampus?.id}" *ngFor="let cp of campus.data" (click)="campus.selecteCampus(cp)">
+                          <div class="mat-menu-item-campus">
+                              <div>
+                                  <mat-icon>location_on</mat-icon> {{cp.name}}
+                              </div>
+                              <div class="subtitle">{{cp.description}}</div>
+                          </div>
+                      </button>
+                  </mat-menu> -->
+                </div>
+            </div>
+            <div class="right-nav">
+                <div class="nav-item-list">
+
+                    <!-- <div class="nav-item">
+                        lorem
+                    </div> -->
+                    <div class="nav-item">
+                      <button mat-icon-button [matMenuTriggerFor]="menuuser" class="cs-mat-menu-item"
+                    style="margin-right:0 !important">
+
+                    <div class="click-avatar">
+                      <img class="image-cover" [src]="env?.users?.profile"
+                      [alt]="env?.users?.name">
+                    </div>
+                </button>
+                <mat-menu #menuuser="matMenu" class="cs-matmenu-content auto user-menu-content"
+                    backdropClass="cs-matmenu-backdrop">
+                    <div class="mat-menu-bar hover" (click)="UpdateProfile()">
+                        <div class="d-flex">
+                            <div class="mat-user-avatar">
+                              <img class="image-cover" [src]="env?.users?.profile"
+                              [alt]="env?.users?.name">
+                            </div>
+                            <div class="mat-user-info">
+                                <h3>{{env?.users?.name}}</h3>
+                                <p>{{env?.users?.email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mat-menu-body">
+                      <mat-list>
+                        <mat-list-item (click)="changePassword()">
+                            <mat-icon mat-list-icon class="app-icon black">vpn_key</mat-icon>
+                            <div mat-line class="d-flex">
+                                Change your password
+                            </div>
+                        </mat-list-item>
+
+                    </mat-list>
+                        <mat-list>
+                            <mat-list-item (click)="logOut()">
+                                <mat-icon mat-list-icon class="app-icon black">input</mat-icon>
+                                <div mat-line class="d-flex">
+                                    Sign Out
+                                </div>
+                            </mat-list-item>
+
+                        </mat-list>
+                    </div>
+                </mat-menu>
+                        <!-- <div class="nav-item-link" [matMenuTriggerFor]="usermenu">
+                            <div class="avatar">
+                                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Sitha">
+                            </div>
+                        </div>
+                        <mat-menu #usermenu="matMenu" class="cs-position ftb">
+                            <div class="menu-content">
+                                <a mat-menu-item (click)="logOut()">
+                                  Sign Out
+                                </a>
+
+                            </div>
+                        </mat-menu> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

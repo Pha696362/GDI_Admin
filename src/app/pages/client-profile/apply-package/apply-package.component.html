@@ -1,0 +1,44 @@
+<form [formGroup]="form" class="dialog-wrapper" *mobxAutorun>
+  <div class="dialog-header">
+    <div class="title">
+      Apply Package
+    </div>
+    <div class="flex1"></div>
+    <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+      <i class="material-icons">&#xE14C;</i>
+    </a>
+  </div>
+
+  <div class="dialog-content">
+    <div class="form-wrapper">
+      <div class="ui form">
+        <div class="field">
+          <p class="t-price two">
+            <span>{{data?.name}}</span>
+            <span style="text-align: right">{{data?.period}} Month<span
+              *ngIf="state?.period > 1">s</span></span>
+          </p>
+        </div>
+
+        <div class="field">
+          <div class="cash-in-w">
+            <label class="title">Price</label>
+            <strong>{{data?.price|currency}}<span *ngIf="data?.discount > 0">, {{data?.discount}}% OFF</span> </strong>
+          </div>
+        </div>
+
+        <div class="field">
+            <label>Note</label>
+            <textarea formControlName="note" placeholder="Please note here" cols="30"
+                rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dialog-footer">
+    <div class="flex1"></div>
+    <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">cancel</a>
+    <button class="enbutton primary m-r16" [disabled]="store?.process" (click)="_save(form.value)">OK</button>
+  </div>
+  <app-spinner *ngIf="store?.process || studentStore?.process"></app-spinner>
+</form>

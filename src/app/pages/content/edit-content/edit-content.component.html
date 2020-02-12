@@ -1,0 +1,149 @@
+<form [formGroup]="form" class="dialog-wrapper">
+  <div class="dialog-header">
+    <div class="title">
+      Update new content
+    </div>
+    <div class="flex1"></div>
+    <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+      <i class="material-icons">&#xE14C;</i>
+    </a>
+  </div>
+
+  <div class="dialog-content">
+    <div style="display: flex;flex: 1; flex-direction: row;">
+      <div class="form-wrapper">
+        <div class="ui form">
+
+
+          <div class="field">
+            <label>Khmer Title
+              <span class="rq-sign">*</span>
+            </label>
+            <input type="text" #focusInput placeholder="Khmer Title" required formControlName="name">
+            <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched"
+              class="error-message">This field is required.</div>
+            <div *ngIf="form.controls['name'].hasError('nameAvailable')" class="error-message">This name is taken. Try
+              another.</div>
+          </div>
+          <div class="field">
+            <label>English Title
+              <span class="rq-sign">*</span>
+            </label>
+            <input onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57) || (event.charCode = 32)" type="text" #focusInput placeholder="Enter content title" required formControlName="slug">
+            <div *ngIf="form.controls['slug'].hasError('required') && form.controls['slug'].touched"
+              class="error-message">This field is required.</div>
+            <div *ngIf="form.controls['slug'].hasError('slug')" class="error-message">This name is taken. Try
+              another.</div>
+          </div>
+
+          <div class="field">
+            <label>Description
+              <!-- <span class="rq-sign">*</span> -->
+            </label>
+
+            <button style="background-color: #F5F6F7" mat-button [disabled]="disableBtn" (click)="showFileManager()">Add
+                file from gallery</button>
+
+            <quill-editor #editor [modules]="modules" (onContentChanged)="onContentChanged($event)"
+              (onEditorCreated)="getEditorInstance($event)" formControlName="editname"></quill-editor>
+          </div>
+
+          <!-- <div class="field">
+              <label>Reference
+              </label>
+              <input type="text" #focusInput placeholder="Enter content title" formControlName="reference">
+
+            </div> -->
+          <!-- <div class="field">
+              <label>Location
+              </label>
+              <input type="text" #focusInput placeholder="Enter location content" formControlName="locations">
+            </div> -->
+          <div class="fields two">
+
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="content-right-side" style=" width: 397px;">
+
+        <mat-label>Select Category</mat-label>
+        <mat-form-field appearance="outlined" style="width:100%;">
+          <div style="position: absolute; padding: 1rem;">
+            <mat-label *ngIf="!selected">
+              {{category}}
+            </mat-label>
+          </div>
+
+          <mat-select (selectionChange)="_onSelectCategory($event.value)" formControlName="category">
+
+            <mat-option *ngFor="let item of store?.dataCategory" [(value)]="item">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+
+
+
+        </mat-form-field>
+
+        <mat-label>Sub-Category</mat-label>
+
+        <mat-form-field appearance="outlined" style="width:100%;">
+            <div style="position: absolute; padding: 1rem;">
+                <mat-label *ngIf="!selected">
+                  {{subCategory}}
+                </mat-label>
+              </div>
+          <mat-select formControlName="subCategory" [(value)]="subCategory">
+            <mat-option *ngFor="let item of store?.dataSubCategory" [value]="item">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div style="margin-bottom: 1rem;">
+          <mat-label>Content Status</mat-label>
+        </div>
+        <div class="field" style="background-color: #ffff ;width:100%;padding-top: 4px;">
+          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            formControlName="status">
+            <mat-radio-button class="example-radio-button" *ngFor="let item of paymentData" [value]="item" [checked]="data.status.key == item.key">
+              <mat-label style="padding-left: 2rem;">{{item?.text}}</mat-label>
+            </mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <div class="field">
+          <button style="background-color: #ffff ;width:100%;margin-top: 1rem" mat-button [disabled]="disableBtn"
+            (click)="showimage()">Add
+            Image Content
+          </button>
+
+          <div class="img-content" *ngIf="fileurl">
+            <img [src]="fileurl" style="width: 100%; margin-top: 1rem;">
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="dialog-footer">
+    <div class="flex1"></div>
+    <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+
+    <button class="enbutton primary m-r16" [disabled]="!form.valid || store?.process"
+      (click)="create(form.value,false)">Update</button>
+  </div>
+  <app-spinner *ngIf="store?.process"></app-spinner>
+</form>

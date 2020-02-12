@@ -1,0 +1,122 @@
+<ng-container *mobxAutorun>
+  <div class="page-section">
+    <div class="action-bar">
+      <div class="nav-content">
+        <h3 class="head-title">
+          Users
+        </h3>
+        <div class="flex1"></div>
+        <div class="action-list-item" *ngIf="env.users?.roles?.permission[9].create">
+          <div class="action-item">
+            <button mat-button (click)="create()" class="enbutton primary">Add new user</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link routerLink="/app/users/data" routerLinkActive #rla="routerLinkActive"
+        active="all">All</a>
+    </nav>
+    <!-- <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngFor="let link of tabs" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">{{link.label}}</a>
+    </nav> -->
+    <ng-container *ngIf="env.data?.length>0 && !env.loading">
+      <div class="card-wrapper tab">
+        <div class="tb-content">
+          <div class="card-header">
+            <div class="card-item">
+              <div class="card-col5">
+                <div class="flex-block">
+                  No
+                </div>
+              </div>
+              <div class="card-col20">
+                <div class="flex-block">
+                  Display Name
+                </div>
+              </div>
+              <div class="card-col15">
+                <div class="flex-block">
+                  Phone number
+                </div>
+              </div>
+              <div class="card-col25">
+                <div class="flex-block">
+                  Email
+                </div>
+              </div>
+              <div class="card-col15">
+                <div class="flex-block">
+                  Role
+                </div>
+              </div>
+              <div class="card-col20">
+                <div class="flex-block">
+                  Created Date
+                </div>
+              </div>
+              <div class="card-col5"></div>
+            </div>
+          </div>
+          <div class="card-content">
+            <ng-container *ngFor="let item of env.data ;let i=index">
+              <div class="card-item">
+                <div class="card-col5">
+                  <div class="flex-block">
+                    <span>{{i+1}}</span>
+                  </div>
+                </div>
+                <div class="card-col20">
+                  <div class="flex-block">
+                    <strong>{{item?.name}}</strong>
+                  </div>
+                </div>
+                <div class="card-col15">
+                  <div class="flex-block">
+                    <strong>{{item?.phone?('+855' +item?.phone):''}}</strong>
+                  </div>
+                </div>
+                <div class="card-col25">
+                  <div class="flex-block ">
+                    {{item?.email}}
+                  </div>
+                </div>
+                <div class="card-col15">
+                  <div class="flex-block ">
+                    {{item?.roles?.name}}
+                  </div>
+                </div>
+                <div class="card-col20">
+                  <div class="flex-block">
+                    {{item?.create_date?.toDate() | date:'medium'}}
+                  </div>
+                </div>
+                <div class="card-col5">
+                  <div class="card-list-action" *ngIf="env.users?.roles?.permission[9].edit || env.users?.roles?.permission[9].delete">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button *ngIf="env.users?.roles?.permission[9].edit" mat-menu-item (click)="update(item)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                      </button>
+
+                      <button *ngIf="env.users?.roles?.permission[9].delete" mat-menu-item (click)="delete(item)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <app-spinner *ngIf="env.loading"></app-spinner>
+</ng-container>
+

@@ -1,0 +1,110 @@
+.flex-1 {
+  flex: 1;
+}
+.dialog-wrapper {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .dialog-header {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .close-dialog {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background-color: transparent;
+      color: #0f0f0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .dialog-footer {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+    .enbutton.primary {
+      background: $primary;
+      &:hover {
+        background: $hoverPrimary;
+      }
+    }
+  }
+  .dialog-content {
+    flex: 1;
+    overflow-y: auto;
+    &.no-scroll {
+      overflow-y: unset;
+    }
+  }
+}
+
+.spiner-content{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.view-file-container{
+    .mat-list-base{
+        display: flex;
+        flex-wrap: wrap;
+        .mat-list-item, .mat-list-option{
+            height: auto;
+            width: calc(100% / 3.15);
+        }
+    }
+    .img-list-block{
+        height: 120px;
+        border-width: 1px;
+        img{
+            height: 100%;
+            width: 100%;
+           
+        }
+    }
+   
+}
+.img-content{
+  width: '35vw';
+  height: auto;
+}
+// .mat-button, .mat-icon-button, .mat-stroked-button {
+//   color: inherit;
+//   background-color: #F5F6F7 !important;
+// }
+
+.ql-editor{
+  box-sizing: border-box;
+  line-height: 1.42;
+  height: 52vh !important;
+  outline: none;
+  overflow-y: auto;
+  padding: 12px 15px;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

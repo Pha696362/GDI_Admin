@@ -1,0 +1,21 @@
+<div class="dialog-wrapper">
+    <div class="dialog-header">
+        <div class="title">
+            Disable Grade System
+        </div>
+        <div class="flex1"></div>
+        <a mat-icon-button>
+            <mat-icon aria-label="close" (click)="dialogRef.close('no')">close</mat-icon>
+        </a>
+    </div>
+    <div class="dialog-content">
+        Are you sure you want to disable this grade {{data?.grade}}({{data?.description}})
+    </div>
+    <div class="dialog-footer">
+        <div class="flex1"></div>
+        <button mat-dialog-close class="enbutton cancel m-r16">Cancel</button>
+        <button type="submit" class="enbutton primary" (click)="disable()">Yes</button>
+    </div>
+    <!-- <app-spinner *ngIf="loading"></app-spinner> -->
+
+</div>

@@ -1,0 +1,71 @@
+<div class="action-bar">
+  <div class="nav-content">
+      <h3 class="head-title">
+          {{name}}
+      </h3>
+      <div class="action-list-item">
+          <div class="action-item" *ngIf="buttonText && !isMenu">
+              <button mat-button (click)="create($event)" class="enbutton primary">{{buttonText}}</button>
+          </div>
+          <div class="action-item" *ngIf="buttonText && isMenu">
+              <button mat-button [matMenuTriggerFor]="menu" class="enbutton primary">
+                  <mat-icon>add</mat-icon>
+                  {{buttonText}}
+                  <mat-icon>arrow_drop_down</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                  <button mat-menu-item class="mat-menu-item-detail" (click)="create(1)">
+                      <div class="mat-detail">
+                          <mat-icon>assignment_ind</mat-icon>
+                          <div>
+                              <span>Add New PUC Student</span>
+                              <p>Students seeking admission to an associate degree program at Paññāsāstra University
+                                  of Cambodia.
+                              </p>
+                          </div>
+                      </div>
+                  </button>
+                  <button mat-menu-item class="mat-menu-item-detail" (click)="create(2)">
+                      <div class="mat-detail">
+                          <mat-icon>recent_actors</mat-icon>
+                          <div>
+                              <span>English to Academic Program</span>
+                              <p>Students seeking admission to an associate degree program at Paññāsāstra University
+                                  of Cambodia.
+                              </p>
+                          </div>
+                      </div>
+                  </button>
+                  <button mat-menu-item class="mat-menu-item-detail" (click)="create(2)">
+                      <div class="mat-detail">
+                          <mat-icon>face</mat-icon>
+                          <div>
+                              <span>PSIS to Academic Program</span>
+                              <p>Students seeking admission to an associate degree program at Paññāsāstra University
+                                  of Cambodia.
+                              </p>
+                          </div>
+                      </div>
+                  </button>
+                  <button mat-menu-item class="mat-menu-item-detail" (click)="create(3)">
+                      <div class="mat-detail">
+                          <mat-icon>transfer_within_a_station</mat-icon>
+                          <div>
+                              <span>Transfer in Student</span>
+                              <p>Students seeking admission to an associate degree program at Paññāsāstra University
+                                  of Cambodia.
+                              </p>
+                          </div>
+                      </div>
+                  </button>
+              </mat-menu>
+          </div>
+      </div>
+  </div>
+</div>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let link of tabs" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      {{link.label}}
+  </a>
+</nav>

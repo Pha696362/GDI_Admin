@@ -1,0 +1,32 @@
+<form class="dialog-wrapper" [formGroup]="form" *mobxAutorun>
+    <div class="dialog-header">
+        <div class="title">
+            Upload file
+        </div>
+        <div class="flex1"></div>
+        <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+            <i class="material-icons">&#xE14C;</i>
+        </a>
+    </div>
+    <div class="dialog-content">
+        <div class="form-wrapper">
+            <div class="ui form">
+                <div class="field">
+                    <input type="file" sigle accept='image/*' #file formControlName="file"
+                        (change)="onSelectedFile(file.files)" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-footer">
+        <div class="flex-1"></div>
+        <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+        <button class="enbutton primary m-r16" (click)="create(form.value)">
+            <div class="spiner-content">
+                <mat-spinner [diameter]="30" *ngIf="fm.process"></mat-spinner>
+            </div>
+            Save
+        </button>
+    </div>
+    <!-- <app-spinner *ngIf="store?.process"></app-spinner> -->
+</form>

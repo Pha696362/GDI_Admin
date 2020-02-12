@@ -1,0 +1,27 @@
+<div class="crime-card-line">
+    <div class="login-content">
+        <!-- <img src="../../../assets/images//logo.jpg" class="apps-logo" /> -->
+        <h2>See what’s happening in the world right now</h2>
+        <div class="form-wrapper">
+            <form [formGroup]="form" class="form-column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input [formControl]="email" matInput placeholder="someone@mail.com">
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" [formControl]="password" matInput
+                        placeholder="someone@mail.com">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+                <div class="error" *ngIf="error">{{error}}</div>
+                <div class="error" *ngIf="auth?.error">{{auth?.error}}</div>
+                <app-primary-button class="primary-button-fill mb24" (onPress)="_emailLogIn(form.value)"
+                    [process]="auth?.process" label="Log in"></app-primary-button>
+                <app-primary-button class="primary-button-link" (onPress)="resetPassword()" label="Forgot password?">
+                </app-primary-button>
+            </form>
+        </div>
+    </div>
+</div>

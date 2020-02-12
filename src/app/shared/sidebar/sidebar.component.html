@@ -1,0 +1,264 @@
+<aside class="sidebar">
+  <div class="sidebar-brand" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/']">
+      <div class="brand-logo">
+          <img [src]="logo" alt="PHSAR TECH">
+      </div>
+      <div style="font-size: 17px !important;" class="sbar-brand-name">
+          HEALTH CAMBODIA
+      </div>
+
+  </div>
+  <div class="sidebar-header">
+      <div class="header-content">
+          <div class="list-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+              [routerLink]="['/app/content/']"
+              >
+              <div class="icon">
+                  <i class="material-icons">&#xE88A;</i>
+              </div>
+              <div class="item-name">
+                  HEALTH CAMBODIA
+              </div>
+          </div>
+          <div class="sitting" >
+              <i class="material-icons">&#xE8B8;</i>
+          </div>
+          <!-- <mat-menu #menusitting="matMenu" class="cs-position flr">
+              <div class="menu-content">
+                  <button mat-menu-item>
+                      <mat-icon>dialpad</mat-icon>
+                      <span>Redial</span>
+                  </button>s
+                  <button mat-menu-item>
+                      <mat-icon>voicemail</mat-icon>
+                      <span>Check voicemail</span>
+                  </button>
+                  <button mat-menu-item>
+                      <mat-icon>notifications_off</mat-icon>
+                      <span>Disable alerts</span>
+                  </button>
+              </div>
+          </mat-menu> -->
+      </div>
+  </div>
+  <!-- *ngIf="env.manuPermisstion?.about?.view || env.manuPermisstion?.contact?.view" -->
+  <div class="sidebar-list-wrapper">
+      <mat-accordion [multi]="true">
+          <mat-expansion-panel *ngIf="env.users?.roles?.permission[0].view || env.users?.roles?.permission[1].view" [expanded]="expansions.scholarship" (closed)="onClosed(6)" (opened)="onOpened(6)">
+              <mat-expansion-panel-header expandedHeight="58px" collapsedHeight="78px"
+                  [class.active]="expansions?.scholarship">
+                  <mat-panel-title>
+                      Information
+                  </mat-panel-title>
+
+                  <mat-panel-description *ngIf="!expansions?.scholarship">About Us, Contact
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="list-content">
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[0].view">
+                      <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/about']">
+                          <div class="icon">
+                              <i class="material-icons">slideshow</i>
+                          </div>
+                          <div class="item-name">
+                              About Us
+                          </div>
+                      </div>
+                  </div>
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[1].view">
+                      <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/contact']">
+                          <div class="icon">
+                              <i class="material-icons">perm_contact_calendar</i>
+                          </div>
+                          <div class="item-name">
+                              Contact Us
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="env.users?.roles?.permission[2].view" [expanded]="expansions.hr" (closed)="onClosed(7)" (opened)="onOpened(7)">
+
+              <mat-expansion-panel-header expandedHeight="58px" collapsedHeight="78px"
+                  [class.active]="expansions?.scholarship">
+                  <mat-panel-title>
+                      Create Content
+                  </mat-panel-title>
+
+                  <mat-panel-description *ngIf="!expansions?.scholarship">Content, TV-News
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <div class="list-content">
+
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[2].view ">
+                      <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/content/']">
+                          <div class="icon">
+                              <i class="material-icons">card_giftcard</i>
+                          </div>
+                          <div class="item-name">
+                              Contents
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel *ngIf="env.users?.roles?.permission[3].view || env.users?.roles?.permission[4].view" [expanded]="expansions.apo" (closed)="onClosed(3)" (opened)="onOpened(3)">
+              <mat-expansion-panel-header expandedHeight="58px" collapsedHeight="78px"
+                  [class.active]="expansions?.apo">
+                  <mat-panel-title>
+                      <!-- ឈ្មោះនៃប្រភេទព័ត៌មាន -->
+                      Category of news
+                  </mat-panel-title>
+                  <mat-panel-description *ngIf="!expansions?.apo"> Category, Types of News
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="list-content">
+
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[3].view ">
+                      <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/category']">
+                          <div class="icon">
+                              <i class="material-icons">category</i>
+                          </div>
+                          <div class="item-name">
+                              Category
+                          </div>
+                      </div>
+                  </div>
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[4].view ">
+                      <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/subcategory']">
+                          <div class="icon">
+                              <i class="material-icons">group_work</i>
+                          </div>
+                          <div class="item-name">
+                               Sub  Category
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="env.users?.roles?.permission[5].view || env.users?.roles?.permission[6].view || env.users?.roles?.permission[7].view" [expanded]="expansions.apo" (closed)="onClosed(4)" (opened)="onOpened(4)">
+              <mat-expansion-panel-header expandedHeight="58px" collapsedHeight="78px"
+                  [class.active]="expansions?.apo">
+                  <mat-panel-title>
+                      <!-- ឈ្មោះនៃប្រភេទព័ត៌មាន -->
+                      <!-- ការផ្សព្វផ្សាយពាណិជ្ជកម្ម -->
+                      Ads Management
+                  </mat-panel-title>
+                  <mat-panel-description *ngIf="!expansions?.apo">Advertisement
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="list-content">
+
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[5].view ">
+                      <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/mobile-advertisement']">
+                          <div class="icon">
+                              <i class="material-icons">chrome_reader_mode</i>
+                          </div>
+                          <div class="item-name">
+                              <!-- Advertisement -->
+                              Mobile Advertisement
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[6].view ">
+                    <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/web-advertisement']">
+                        <div class="icon">
+                            <i class="material-icons">chrome_reader_mode</i>
+                        </div>
+                        <div class="item-name">
+                            <!-- Advertisement -->
+                            Web Advertisement
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="list-item" *ngIf="env.users?.roles?.permission[7].view ">
+                    <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/packages']">
+                        <div class="icon">
+                            <i class="material-icons">chrome_reader_mode</i>
+                        </div>
+                        <div class="item-name">
+                            <!-- Advertisement -->
+                            Packages
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="env.users?.roles?.permission[8].view || env.users?.roles?.permission[9].view" [expanded]="expansions.hr" (closed)="onClosed(8)" (opened)="onOpened(8)">
+
+            <mat-expansion-panel-header expandedHeight="58px" collapsedHeight="78px"
+                [class.active]="expansions?.scholarship">
+                <mat-panel-title>
+                    Administator
+                </mat-panel-title>
+
+                <!-- <mat-panel-description *ngIf="!expansions?.scholarship">Users
+                </mat-panel-description> -->
+            </mat-expansion-panel-header>
+
+            <div class="list-content">
+
+                <div class="list-item" *ngIf="env.users?.roles?.permission[8].view ">
+                    <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/role/']">
+                        <div class="icon">
+                            <i class="material-icons">supervised_user_circle</i>
+                        </div>
+                        <div class="item-name">
+                            Role
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item" *ngIf="env.users?.roles?.permission[9].view ">
+                  <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/users/']">
+                      <div class="icon">
+                          <i class="material-icons">supervised_user_circle</i>
+                      </div>
+                      <div class="item-name">
+                          Users
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="env.users?.roles?.permission[10].view " [expanded]="expansions.hr" (closed)="onClosed(8)" (opened)="onOpened(8)">
+
+          <mat-expansion-panel-header expandedHeight="58px" collapsedHeight="78px"
+              [class.active]="expansions?.scholarship">
+              <mat-panel-title>
+                  Gallery
+              </mat-panel-title>
+
+              <!-- <mat-panel-description *ngIf="!expansions?.scholarship">Users
+              </mat-panel-description> -->
+          </mat-expansion-panel-header>
+
+          <div class="list-content">
+              <div class="list-item">
+                <div class="list-item-row" routerLinkActive="active" [routerLink]="['/app/images']">
+                    <div class="icon">
+                        <i class="material-icons">image</i>
+                    </div>
+                    <div class="item-name">
+                        Manage Gallery
+                    </div>
+                </div>
+            </div>
+          </div>
+      </mat-expansion-panel>
+      </mat-accordion>
+  </div>
+  <div class="sidebar-footer">
+      <div class="sidebar-toggle-button" (click)="togglesidebar()">
+          <div class="arrow-icon"></div>
+      </div>
+  </div>
+</aside>

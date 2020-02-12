@@ -1,0 +1,111 @@
+<ng-container *mobxAutorun>
+  <div class="page-section">
+    <div class="action-bar">
+      <div class="nav-content">
+        <h3 class="head-title">
+          Roles
+        </h3>
+        <div class="flex1"></div>
+        <div class="action-list-item" *ngIf="env.users?.roles?.permission[8].create">
+          <div class="action-item">
+            <button mat-button (click)="create()" class="enbutton primary">Add new role</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link routerLink="/app/roles/data" routerLinkActive #rla="routerLinkActive"
+        active="all">All</a>
+    </nav>
+    <ng-container *ngIf="env.data?.length>0 && !env.loading">
+      <div class="card-wrapper tab">
+        <div class="tb-content">
+          <div class="card-header">
+            <div class="card-item">
+              <div class="card-col10">
+                <div class="flex-block">
+                  No
+                </div>
+              </div>
+              <div class="card-col30">
+                <div class="flex-block">
+                  Name
+                </div>
+              </div>
+              <div class="card-col30">
+                <div class="flex-block">
+                  Create By
+                </div>
+              </div>
+              <div class="card-col25">
+                <div class="flex-block">
+                  Create Date
+                </div>
+              </div>
+              <div class="card-col5"></div>
+            </div>
+          </div>
+          <div class="card-content">
+            <ng-container *ngFor="let item of env.data ;let i=index">
+              <div class="card-item">
+                <div class="card-col10">
+                  <div class="flex-block">
+                    <span>{{i+1}}</span>
+                  </div>
+                </div>
+                <div class="card-col30">
+                  <div class="flex-block">
+                    <strong>{{item?.name}}</strong>
+                  </div>
+                </div>
+                <div class="card-col30">
+                  <div class="flex-block">
+                    <strong>{{item?.create_by?.name}}</strong>
+                  </div>
+                </div>
+                <div class="card-col25">
+                  <div class="flex-block ">
+                    {{item?.create_date?.toDate() | date :'medium'}}
+                  </div>
+                </div>
+                <div class="card-col5">
+                  <div *ngIf="env.users?.roles?.permission[8].edit || env.users?.roles?.permission[8].delete" class="card-list-action">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button *ngIf="env.users?.roles?.permission[8].edit" mat-menu-item (click)="update(item)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                      </button>
+                      <button *ngIf="env.users?.roles?.permission[8].delete" mat-menu-item (click)="delete(item)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div *ngIf="env?.empty" class="empty-block">
+        <div class="center-block-empty">
+          <div class="empty-img">
+            <img src="https://mobilecenter.azureedge.net/generated/img/no-apps-db6363dd644196e2291b243bc210e1b0.svg"
+              alt="empty">
+          </div>
+          <div class="empty-text">
+            <p class="empty-state-title">No Role</p>
+            <p class="empty-state-desc">
+              You don't have any role yet. Please create role for apply role in user.
+            </p>
+            <button *ngIf="env.users?.roles?.permission[8].create" mat-button class="add-button" (click)="create()">Add new Role</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <app-spinner *ngIf="env.loading"></app-spinner>
+</ng-container>

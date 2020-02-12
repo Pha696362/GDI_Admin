@@ -1,0 +1,95 @@
+<ng-container *mobxAutorun>
+  <!-- <div class="container" *ngIf="block">
+    <ng-container *ngIf="block && scholarshipPenaltyRef">
+      <app-block-card css="penalty" header="Student has scholarship penalty!"
+        subtitle="If student scholarship or loan 100%! Please inform to student contact to Justin.op Office for resolve this problem because student may has scholarship penalty or loss some information at Scholarship Office."
+        [creditRef]="scholarshipPenaltyRef" [balance]="scholarshipPenalty|currency"
+        text="Student must pay this scholarship penalty with Cashier before start enroll new course."></app-block-card>
+    </ng-container>
+    <ng-container *ngIf="block && creditRef">
+      <app-block-card header="Student has unpaid payment from previous term!"
+        subtitle="If student scholarship or loan 100%! Please inform to student contact to Justin.op Office for resolve this problem because student may has scholarship penalty or loss some information at Scholarship Office."
+        [creditRef]="creditRef" [balance]="creditAmount|currency" [text]="creditRef?.memo"></app-block-card>
+    </ng-container>
+    <ng-container *ngIf="block && statusRef">
+      <app-block-card css="inform" header="Student has been blocked for enrollment!"
+        subtitle="Student may be incomplete some documents with university." [creditRef]="statusRef"
+        [text]="statusRef?.memo">
+      </app-block-card>
+    </ng-container>
+  </div> -->
+
+  <div class="c-cart" *ngIf="packages?.length > 0 && !store?.loading && store?.isMember">
+    <div class="m-cart">
+      <h4 class="title">Full Access Membership</h4>
+      <div class="price">
+        <div class="p-content">
+          <div class="p-f">
+            <div class="symbol-usd">USD</div>
+            <div class="symbol">$</div>
+            <div class="symbol-p">{{store?.subscriber?.product?.price}}</div>
+          </div>
+          <div class="p-s">
+            <b>{{store?.subscriber?.product?.name}}</b>
+            Expired at: {{store?.subscriber?.expiredDate?.toDate() | date : 'dd-MMMM-yyyy'}}
+          </div>
+        </div>
+      </div>
+      <div class="m-p">
+        <span class="label">{{store?.subscriber?.product?.period}} Month<span
+            *ngIf="store?.subscriber?.product?.period>1">s</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="docs-home-screen list-package" *ngIf="packages?.length > 0 && !store?.loading && !store?.isMember">
+
+    <!-- <aside class="special-memo asm-ma" *ngIf="store?.isMember">
+      <ng-container>
+        <strong class="name">Note:</strong>
+        <span>
+          <strong>Period: </strong>: {{store?.subscriber?.product?.period}} 
+          <strong>, Expired Date: </strong> {{store?.subscriber?.expiredDate?.toDate() | date : 'dd-MMMM-yyyy'}}
+          <p>This account already subscribe with <b>{{store?.subscriber?.product?.name}}</b> this packages.</p>
+        </span>
+      </ng-container>
+    </aside> -->
+
+    <ng-container *ngFor="let state of packages">
+      <div class="options-card link" (click)="_applyPackage(state)">
+        <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false"
+          style="height: 32px; width: 32px; display: block; fill: rgb(255, 180, 0);">
+          <path
+            d="m17.61 13.4-2.49-.68c-2.76-.75-.51-2.87-2.88-3.51l-2.88-.78a.9.9 0 0 0 -1.1.62l-1.27 4.54 3.81 1.04c2.37.64.13 2.76 2.88 3.51l2.72.74 3.26.89z">
+          </path>
+          <path
+            d="m1.5 22a .52.52 0 0 1 -.13-.02.5.5 0 0 1 -.35-.61l5.21-19.02a.5.5 0 0 1 .61-.35l6.92 1.88a2.02 2.02 0 0 1 1.65 2.06c.08.69.13 1.15 1.23 1.45l5.98 1.63a.5.5 0 0 1 .2.86l-4.55 4.04 1.86 5.78a.5.5 0 0 1 -.61.64l-5.98-1.63a2.29 2.29 0 0 1 -1.96-2.3c-.07-.66-.11-.99-.92-1.21l-3.82-1.04a.5.5 0 1 1 .25-.97h.01l3.82 1.04a2.03 2.03 0 0 1 1.65 2.07c.08.69.13 1.15 1.23 1.45l5.1 1.39-1.67-5.22a.5.5 0 0 1 .14-.53l4.11-3.64-5.09-1.39a2.29 2.29 0 0 1 -1.96-2.3c-.07-.66-.11-.99-.92-1.21l-6.44-1.75-5.08 18.54a.5.5 0 0 1 -.48.37z"
+            fill="#484848"></path>
+        </svg>
+        <div class="flex-box flex1">
+          <div class="list-card">
+            <div class="list-card-header">
+              <span matBadgeColor="primary">
+                <strong>{{state?.name}} </strong>
+              </span>
+            </div>
+            <div class="list-card-subtitle">
+              <span *ngIf="state?.discount > 0">Discount: {{state?.discount}}%</span>
+              <span *ngIf="state?.discount === 0">No Discount</span>
+            </div>
+            <div class="tag-list">
+              <span>Period: {{state?.period}} Month<span *ngIf="state?.period > 1">s</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="total-fee">
+          <h4>{{state?.price|currency}}</h4>
+        </div>
+      </div>
+    </ng-container>
+    <app-empty-data *ngIf="packages?.length===0 && !store?.loading" name="You don't have any packages"
+      subtitle="Please offer new packages in admin">
+    </app-empty-data>
+  </div>
+  <app-spinner *ngIf="store?.loading"></app-spinner>
+</ng-container>

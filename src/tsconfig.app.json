@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true
+  },
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

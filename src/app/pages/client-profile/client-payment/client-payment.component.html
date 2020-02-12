@@ -1,0 +1,39 @@
+<ng-container *mobxAutorun>
+  <div class="docs-home-screen list-package" *ngIf="store?.receipts?.length>0">
+    <div class="rows no-mb">
+      <h5 class="title">Receipts</h5>
+    </div>
+    <div class="container">
+      <ng-container>
+        <div class="cart-content">
+          <div class="items-cart">
+            <div class="e-carts" *ngIf="store?.receipts?.length>0">
+              <div class="i-card-body">
+                <ng-container>
+                  <div class="i-cart" *ngFor="let data of store?.receipts">
+                    <div class="i-left">
+                      <h2 class="t-title"> Invoice No: {{ data?.invoice_no }}</h2>
+                      <p>{{data?.product?.name}} - {{data?.product?.period}} Month
+                        <!-- <span *ngIf="data?.product?.period>0">s</span> -->
+                      </p>
+                        <p>Receive By: {{ data?.received_by?.name}}</p>
+                    </div>
+                    <div class="i-right t-col">
+                      <h4 class="i-price">
+                        {{ data?.amount | currency }}
+                      </h4>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <app-empty-data *ngIf="store?.receipts?.length==0" name="No Receipts"
+        subtitle="You can offer course to student by click on New Receipts.">
+      </app-empty-data>
+    </div>
+  </div>
+  <app-spinner *ngIf="process"></app-spinner>
+</ng-container>

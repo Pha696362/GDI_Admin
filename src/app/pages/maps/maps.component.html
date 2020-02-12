@@ -1,0 +1,17 @@
+<ng-container *mobxAutorun>
+<agm-map [latitude]="lat" [usePanning]='true' [zoom]="zoom" (mapReady)="mapReady($event)"
+  (mapClick)="onMaker($event)" [longitude]="lng">
+  <agm-marker [latitude]="currentLat" [longitude]="currentLong"></agm-marker>
+      <agm-marker *ngFor="let item of store?.data"
+      [label]="item?.category?.name|markerLabel"
+      [latitude]="item?.map?.latitude|toNumber" 
+      [longitude]="item?.map?.longitude|toNumber">
+          <agm-info-window>
+            <strong>លេខករណី: {{item.crime_no}}</strong><br/>
+            <strong>ប្រភេទបទល្មើស: {{item?.category?.name}}:</strong><br/>
+            <strong>បទល្មើស: {{item?.sub_category?.name}}:</strong><br/>
+            <strong>មូលហេតុបង្ករ: {{item?.case_reason?.name}}</strong><br/>
+          </agm-info-window>
+        </agm-marker>
+</agm-map>
+</ng-container>

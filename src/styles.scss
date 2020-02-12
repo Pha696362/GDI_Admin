@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Moul|Siemreap');
+@import "/assets/styles/app.scss";
+*,
+*:hover {
+    text-decoration: none !important;
+}
+
+html, body {
+	padding:0;
+	margin:0;
+	min-height:100%;
+    background-color:$background !important;
+	background-attachment:fixed;
+}
+html { z-index: 1; position:relative; }
+#bubbleContainer {
+	z-index:0;
+	overflow:hidden;
+	position:fixed;
+	height:100%;
+    width:100%;
+
+}
+#bubbleContainer div {
+	position:fixed;
+	z-index:0;
+	border-radius:10000px;
+}
+body {
+    color: #111;
+    font-family:$googleFont;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1;
+    margin: 0;
+    font-size: 100%;
+}
+
+app-layout{
+    z-index: 3;
+}
+.apps-logo{
+    width: 120px;
+    margin-bottom: 20px;
+}

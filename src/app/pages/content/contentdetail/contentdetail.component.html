@@ -1,0 +1,24 @@
+<form [formGroup]="form" class="dialog-wrapper">
+    <div class="dialog-header">
+      <div class="title">
+       Content Detail
+      </div>
+      <div class="flex1"></div>
+      <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+        <i class="material-icons">&#xE14C;</i>
+      </a>
+    </div>
+    <div class="dialog-content" *ngIf="!store?.process">
+        <div class="dialog-header">
+            <div class="title">
+              {{name}}
+            </div>
+          </div>
+      <div style="display: flex;flex: 1; flex-direction: row;">
+        <div class="form-wrapper" style="padding: 2rem;"> 
+         <p [innerHTML]="editname" class="editor"></p>
+        </div>
+      </div>
+    </div>
+    <app-spinner *ngIf="store?.process"></app-spinner>
+  </form>

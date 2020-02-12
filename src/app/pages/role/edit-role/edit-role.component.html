@@ -1,0 +1,71 @@
+<div class="dialog-wrapper" *mobxAutorun>
+  <div class="dialog-header">
+    <div class="title">
+      Add New Account
+    </div>
+    <div class="flex1"></div>
+    <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+      <i class="material-icons">&#xE14C;</i>
+    </a>
+  </div>
+
+  <div class="dialog-content">
+    <div class="form-wrapper">
+      <div class="ui form">
+        <form [formGroup]="form">
+        <div class="field">
+          <label>Name
+            <span class="rq-sign">*</span>
+          </label>
+          <input #focusInput type="text" class="lg-input" placeholder="Enter full name" required formControlName="name">
+          <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="error-message">This field is required.</div>
+          <div *ngIf="form.controls['name'].hasError('nameAvailable')" class="error-message">This code is taken. Try another.</div>
+        </div>
+      </form>
+
+      <div class="field" style="padding-top: 15px;">
+        <label for="">Permission</label>
+        <mat-list-item *ngFor="let item of permisstions">
+          <mat-checkbox
+          class="custom-tree"
+          [(ngModel)]="item.view"
+          labelPosition="after"
+          (change)="master_change()"
+          >{{ item.name }}
+          </mat-checkbox>
+              <!-- sub -->
+              <mat-checkbox
+              class="sub-custom-tree"
+              *ngIf="item.view"
+              [(ngModel)]="item.create"
+              labelPosition="after"
+              (change)="list_change()"
+              >Create</mat-checkbox>
+
+              <mat-checkbox
+              class="sub-custom-tree"
+              *ngIf="item.view"
+              [(ngModel)]="item.edit"
+              labelPosition="after"
+              (change)="list_change()"
+              >Edit</mat-checkbox>
+
+              <mat-checkbox
+              class="sub-custom-tree"
+              *ngIf="item.view"
+              [(ngModel)]="item.delete"
+              labelPosition="after"
+              (change)="list_change()"
+              >Delete</mat-checkbox>
+            </mat-list-item>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="dialog-footer">
+    <div class="flex1"></div>
+
+    <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+    <button class="enbutton primary m-r16" [disabled]="!form.valid" (click)="create(form.value,false)">Save Close</button>
+
+  </div>

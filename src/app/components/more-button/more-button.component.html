@@ -1,0 +1,9 @@
+<div class="fetch-more">
+  <!-- <button mat-icon-button>
+    <mat-icon aria-label="chevron_left">chevron_left</mat-icon>
+  </button> -->
+  <button mat-button [disabled]="loading" (click)="fetchMore()">
+   {{loading?'Loading...':'Show More'}}
+   <!-- <mat-icon aria-label="chevron_right">chevron_right</mat-icon> -->
+  </button>
+</div>

@@ -1,0 +1,98 @@
+<form [formGroup]="form" class="dialog-wrapper">
+  <div class="dialog-header">
+    <div class="title">
+      Add New Account
+    </div>
+    <div class="flex1"></div>
+    <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+      <i class="material-icons">&#xE14C;</i>
+    </a>
+  </div>
+
+  <div class="dialog-content">
+    <div class="form-wrapper">
+      <div class="ui form">
+        <div class="field" style="text-align: center;">
+          <img [src]="profile" style="max-width: 100px;border-radius: 50%;width: 100px;height: 100px;object-fit: cover;" alt=""><br />
+          <p class="change-profile" mat-button style="text-align: center;" (click)="editProfile()" >Change</p>
+        </div>
+        <div class="field">
+          <label>Name
+            <span class="rq-sign">*</span>
+          </label>
+          <input #focusInput type="text" class="lg-input" placeholder="Enter full name" required formControlName="name">
+          <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="error-message">This field is required.</div>
+          <div *ngIf="form.controls['name'].hasError('nameAvailable')" class="error-message">This code is taken. Try another.</div>
+        </div>
+        <div class="field">
+          <label>Email
+            <span class="rq-sign">*</span>
+          </label>
+          <input type="text" class="lg-input" placeholder="Enter a valid email" required formControlName="email">
+          <div *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="error-message">This field is required.</div>
+          <div *ngIf="form.controls['email'].hasError('pattern') && form.controls['email'].touched" class="error-message">Invalid email</div>
+        </div>
+
+        <div class="field">
+          <label>Password
+            <span class="rq-sign">*</span>
+          </label>
+          <input type="password" class="lg-input" placeholder="Enter a valid Password" required minlength="6" maxlength="25" formControlName="password">
+          <div *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="error-message">This field is required.</div>
+          <div *ngIf="form.controls['password'].hasError('minlength') && form.controls['password'].touched" class="error-message">min length must be 6 and max length 25</div>
+        </div>
+        <div class="field">
+          <label>Confirm Password
+            <span class="rq-sign">*</span>
+          </label>
+          <input type="password" class="lg-input" placeholder="Enter a valid Password" required minlength="6" maxlength="25" formControlName="confirm_password">
+          <div *ngIf="form.controls['confirm_password'].hasError('required') && form.controls['confirm_password'].touched" class="error-message">This field is required.</div>
+          <div *ngIf="form.errors?.mismach !== null && form.controls['confirm_password'].touched" class="error-message">Confirm Password & Password must be same.</div>
+        </div>
+        <div class="field">
+          <label>Roles</label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let item of roles" [value]="item.key">{{ item.name }}</mat-option>
+          </mat-select >
+        </div>
+
+        <div class="field">
+          <label>Phone number
+            <!-- <span class="rq-sign">*</span> -->
+          </label>
+          <input type="number" class="lg-input" placeholder="Enter a valid phone number" formControlName="phone">
+          <!-- <div *ngIf="form.controls['phone'].hasError('required') && form.controls['phone'].touched" class="error-message">This field is required.</div> -->
+        </div>
+
+        <div class="field">
+          <label>Facebook</label>
+          <input type="text" class="lg-input" placeholder="Enter facebook account" formControlName="facebook">
+        </div>
+
+        <div class="field">
+          <label>LinkIn</label>
+          <input type="text" class="lg-input" placeholder="Enter LinkIn account" formControlName="linkin">
+        </div>
+
+        <div class="field">
+          <label>Google Plus</label>
+          <input type="text" class="lg-input" placeholder="Enter Google Plus account" formControlName="googleplus">
+        </div>
+
+        <div class="field">
+          <label>Description
+          </label>
+          <textarea class="lg-input" placeholder="Description" formControlName="description"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="dialog-footer">
+    <div class="flex1"></div>
+    <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+    <!-- <button type="submit" class="enbutton primary m-r16" [disabled]="!form.valid || store?.process || byPhone" (click)="create(form.value,true)">Save New</button> -->
+    <button class="enbutton primary m-r16" [disabled]="!form.valid || store?.process" (click)="create(form.value,false)">Save Close</button>
+  </div>
+  <app-spinner *ngIf="Auth?.process"></app-spinner>
+</form>

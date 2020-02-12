@@ -1,0 +1,32 @@
+<form class="dialog-wrapper" *mobxAutorun>
+    <div class="dialog-header">
+      <div class="title">
+        Images Directory
+      </div>
+      <div class="flex1"></div>
+      <a mat-dialog-close class="close-dialog" (click)="dialogRef.close('no')">
+        <i class="material-icons">&#xE14C;</i>
+      </a>
+    </div>
+    <div class="dialog-content">
+      <div class="form-wrapper">
+        <button mat-button [disabled]="disableBtn" (click)="showUploadFile()" color="primary">Upload</button>
+        <div *ngIf="fm?.advertise_manager" class="view-file-container">
+          <mat-selection-list #files (selectionChange)="onSelection(files.selectedOptions.selected)">
+            <mat-list-option *ngFor="let item of fm?.advertise_manager" [value]='item' style="background-color: #f7f9fa; margin: 5px;">
+              <div class="img-list-block" >
+                  <img [src]="item?.url"/>
+              </div>
+
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <div class="flex-1"></div>
+      <a mat-dialog-close class="enbutton cancel m-r16" (click)="dialogRef.close('no')">Cancel</a>
+        <button class="enbutton primary m-r16" (click)="dialogRef.close(current_selected)">Add to text</button>
+    </div>
+    <app-spinner *ngIf="fm?.process"></app-spinner>
+  </form>
